@@ -2,6 +2,15 @@ import jwt from 'jsonwebtoken'
 import { getUserByEmail, createUser } from '../services/userService.js'
 import bcrypt from 'bcryptjs'
 
+const createJWT = (user) => {
+  const payload = { id: user.id, email: user.email }
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: '24hr',
+  })
+
+  return token
+}
+
 export const login = async (req, res) => {
   const { email, password } = req.body
   try {
@@ -15,10 +24,7 @@ export const login = async (req, res) => {
       res.status(401).json({ message: 'Invalid password' })
     }
 
-    const payload = { id: user.id, email: user.email }
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: '24hr',
-    })
+    const token = createJWT(user)
     return res.status(200).json({ token })
   } catch (err) {
     console.error(err)
@@ -41,11 +47,7 @@ export const signup = async (req, res) => {
     const user = await createUser(userData)
     console.log(user)
 
-    const payload = { id: user.id, email: user.email }
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: '24hr',
-    })
-
+    const token = createJWT(user)
     res.status(201).json({ token, message: 'Sign up success' })
   } catch (err) {
     console.error(err)
