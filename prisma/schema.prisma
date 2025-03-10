@@ -37,7 +37,8 @@ model Comment {
 model User {
   id        Int      @id @default(autoincrement())
   firstName String
-  lastName  String
+  lastName  String   
+  email     String   @unique
   password  String
   admin     Boolean  @default(false)
   posts     Post[]
