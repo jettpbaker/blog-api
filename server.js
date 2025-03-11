@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/posts', posts)
-app.use('/api/comments', isAuthed, isAdmin, comments)
+app.use('/api/comments', comments)
 app.use('/auth', auth)
 
 app.listen(3000, () => {

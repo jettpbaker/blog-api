@@ -1,10 +1,11 @@
 import Router from 'express'
 import * as comment from '../controllers/commentsController.js'
+import { isAuthed } from '../middleware/authMiddleware.js'
 
 const router = Router()
 
-router.post('/', comment.newComment)
+router.post('/', isAuthed, comment.newComment)
 
-router.delete('/:id', comment.deleteComment)
+router.delete('/:id', isAuthed, comment.deleteComment)
 
 export default router

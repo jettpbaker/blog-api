@@ -25,7 +25,7 @@ export const login = async (req, res) => {
     }
 
     const token = createJWT(user)
-    return res.status(200).json({ token })
+    return res.status(200).json({ token, message: 'Login success' })
   } catch (err) {
     console.error(err)
     return res.status(500).json({ message: 'Server error' })
@@ -45,7 +45,6 @@ export const signup = async (req, res) => {
 
   try {
     const user = await createUser(userData)
-    console.log(user)
 
     const token = createJWT(user)
     res.status(201).json({ token, message: 'Sign up success' })
