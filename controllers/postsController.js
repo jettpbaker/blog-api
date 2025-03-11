@@ -2,6 +2,7 @@ import {
   getAllPosts,
   createPost as newPost,
   getPostById,
+  getPostAuthor,
   deletePostById,
   publishPostById,
 } from '../services/postService.js'
@@ -21,7 +22,7 @@ export const getPost = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-  const { title, content, comments, published, createdAt } = req.body
+  const { title, content, comments, published } = req.body
   const authorId = Number(req.body.authorId)
 
   const post = {
@@ -32,33 +33,29 @@ export const createPost = async (req, res) => {
     },
     comments,
     published,
-    createdAt,
   }
 
   const createdPost = await newPost(post)
   res.status(201).json(createdPost)
 }
 
-/*
-model Post {
-    id        Int      @id @default(autoincrement())
-    title     String
-    content   String   @db.Text
-    author    User   @relation(fields: [authorId], references: [id])
-    authorId  Int
-    comments  Comment[]
-    published Boolean  @default(false)
-    createdAt DateTime @default(now())
-  }   
-*/
-
 export const deletePost = async (req, res) => {
-  const id = Number(req.params.id)
-  const deletedPost = await deletePostById(id)
+  const postID = Number(req.params.id)
+  const userID = Number(req.user.id)
 
-  if (!deletedPost) {
+  const author = await getPostAuthor(postID)
+
+  if (!author) {
     return res.status(404).json({ message: 'Post to delete not found' })
   }
+
+  const authorID = author.authorId
+
+  if (userID !== authorID) {
+    return res.status(403).json({ message: 'You did not author this post' })
+  }
+
+  await deletePostById(postID)
   res.status(200).json({ message: 'Post deleted' })
 }
 

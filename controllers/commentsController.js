@@ -1,7 +1,7 @@
-import { createComment, deleteCommentById } from '../services/commentService.js'
+import { createComment, getCommentAuthor, deleteCommentById } from '../services/commentService.js'
 
 export const newComment = async (req, res) => {
-  const { content, createdAt } = req.body
+  const { content } = req.body
   const authorId = Number(req.body.authorId)
   const postId = Number(req.body.postId)
 
@@ -13,7 +13,6 @@ export const newComment = async (req, res) => {
     post: {
       connect: { id: postId },
     },
-    createdAt,
   }
 
   const createdComment = await createComment(comment)
@@ -21,41 +20,21 @@ export const newComment = async (req, res) => {
 }
 
 export const deleteComment = async (req, res) => {
-  const id = Number(req.params.id)
-  const comment = await deleteCommentById(id)
+  const commentID = Number(req.params.id)
+  const userID = Number(req.user.id)
 
-  if (!comment) {
+  const commentAuthor = await getCommentAuthor(commentID)
+
+  if (!commentAuthor) {
     return res.status(404).json({ message: 'Comment not found' })
   }
 
+  const commentAuthorID = commentAuthor.authorId
+
+  if (commentAuthorID !== userID) {
+    return res.status(403).json({ message: 'You did not author this comment' })
+  }
+
+  await deleteCommentById(commentID)
   res.status(200).json({ message: 'Comment deleted' })
 }
-
-// model Comment {
-//     id        Int      @id @default(autoincrement())
-//     content   String
-//     author    User   @relation(fields: [authorId], references: [id])
-//     authorId  Int
-//     post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-//     postId    Int
-//     createdAt DateTime @default(now())
-//   }
-
-// export const createPost = async (req, res) => {
-//   const { title, content, comments, published, createdAt } = req.body
-//   const authorId = Number(req.body.authorId)
-
-//   const post = {
-//     title,
-//     content,
-//     author: {
-//       connect: { id: authorId },
-//     },
-//     comments,
-//     published,
-//     createdAt,
-//   }
-
-//   const createdPost = await newPost(post)
-//   res.status(201).json(createdPost)
-// }

@@ -54,6 +54,15 @@ export const getPostById = async (id) => {
   return post
 }
 
+export const getPostAuthor = async (id) => {
+  return await prisma.post.findUnique({
+    where: { id },
+    select: {
+      authorId: true,
+    },
+  })
+}
+
 export const createPost = async (post) => {
   const newPost = await prisma.post.create({
     data: post,
