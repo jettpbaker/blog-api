@@ -16,12 +16,12 @@ export const login = async (req, res) => {
   try {
     const user = await getUserByEmail(email)
     if (!user) {
-      res.status(401).json({ message: 'Invalid email' })
+      return res.status(401).json({ message: 'Invalid email' })
     }
 
-    const isMatch = bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
-      res.status(401).json({ message: 'Invalid password' })
+      return res.status(401).json({ message: 'Invalid password' })
     }
 
     const token = createJWT(user)
