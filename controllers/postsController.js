@@ -22,16 +22,16 @@ export const getPost = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-  const { title, content, comments, published } = req.body
+  const { title, content, description, published } = req.body
   const authorId = Number(req.body.authorId)
 
   const post = {
     title,
     content,
+    description,
     author: {
       connect: { id: authorId },
     },
-    comments,
     published,
   }
 
