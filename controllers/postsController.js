@@ -7,6 +7,8 @@ import {
   publishPostById,
 } from '../services/postService.js'
 
+import { isAdminById } from '../services/userService.js'
+
 export const getPosts = async (req, res) => {
   const posts = await getAllPosts()
   res.json(posts)
@@ -22,8 +24,9 @@ export const getPost = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-  const { title, content, description, published } = req.body
-  const authorId = Number(req.body.authorId)
+  const { title, content, description } = req.body
+  const authorId = Number(req.user.id)
+  const published = req.user.admin
 
   const post = {
     title,
