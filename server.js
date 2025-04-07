@@ -2,6 +2,7 @@ import express from 'express'
 import passport from './config/passport.js'
 import posts from './router/posts.js'
 import comments from './router/comments.js'
+import ai from './router/ai.js'
 import auth from './router/auth.js'
 import { isAuthed, isAdmin } from './middleware/authMiddleware.js'
 import cors from 'cors'
@@ -9,8 +10,6 @@ import cors from 'cors'
 const app = express()
 
 const allowedOrigins = [process.env.CLIENT_URL]
-
-console.log('Allowed CORS Origins:', allowedOrigins)
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -31,6 +30,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/posts', posts)
 app.use('/api/comments', comments)
+app.use('/api/ai', ai)
 app.use('/auth', auth)
 
 app.listen(3000, () => {

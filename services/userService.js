@@ -19,3 +19,8 @@ export const createUser = async (user) => {
     data: user,
   })
 }
+
+export const isAdminById = async (id) => {
+  const user = getUserById(id)
+  return user.admin
+}
