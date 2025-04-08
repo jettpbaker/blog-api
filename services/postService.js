@@ -5,6 +5,7 @@ export const getAllPosts = async () => {
     select: {
       title: true,
       content: true,
+      description: true,
       published: true,
       createdAt: true,
       author: {
