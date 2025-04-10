@@ -5,6 +5,8 @@ export const generateDescription = async (req, res) => {
 
   const postMarkdown = req.body.postMarkdown
 
+  return res.json({ description: 'hardcoded description' })
+
   const prompt = `You are a helpful assistant that generates concise and engaging descriptions for blog posts. Your responses MUST be in JSON format, containing ONLY a "description" field. The description should be a single sentence.  Focus on capturing the essence of the blog post and piquing the reader's interest. DO NOT include any introductory or concluding phrases outside of the JSON structure. Do not answer as an AI model, instead just follow the instructions.
 
     Blog Post Content:
