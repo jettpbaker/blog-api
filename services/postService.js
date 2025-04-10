@@ -42,6 +42,7 @@ export const getPostById = async (id) => {
         select: {
           content: true,
           createdAt: true,
+          id: true,
           author: {
             select: {
               firstName: true,

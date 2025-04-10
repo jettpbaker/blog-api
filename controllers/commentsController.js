@@ -2,7 +2,7 @@ import { createComment, getCommentAuthor, deleteCommentById } from '../services/
 
 export const newComment = async (req, res) => {
   const { content } = req.body
-  const authorId = Number(req.body.authorId)
+  const authorId = Number(req.user.id)
   const postId = Number(req.body.postId)
 
   const comment = {

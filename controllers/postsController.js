@@ -15,6 +15,7 @@ export const getPosts = async (req, res) => {
 }
 
 export const getPost = async (req, res) => {
+  console.log('Request incoming!')
   const id = Number(req.params.id)
   const post = await getPostById(id)
   if (!post) {
