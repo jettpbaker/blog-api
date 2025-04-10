@@ -7,15 +7,12 @@ import {
   publishPostById,
 } from '../services/postService.js'
 
-import { isAdminById } from '../services/userService.js'
-
 export const getPosts = async (req, res) => {
   const posts = await getAllPosts()
   res.json(posts)
 }
 
 export const getPost = async (req, res) => {
-  console.log('Request incoming!')
   const id = Number(req.params.id)
   const post = await getPostById(id)
   if (!post) {

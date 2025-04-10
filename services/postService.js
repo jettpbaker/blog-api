@@ -2,6 +2,9 @@ import prisma from '../prisma/client.js'
 
 export const getAllPosts = async () => {
   const posts = await prisma.post.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
     select: {
       title: true,
       content: true,
@@ -39,10 +42,13 @@ export const getPostById = async (id) => {
         },
       },
       comments: {
+        orderBy: {
+          createdAt: 'desc',
+        },
         select: {
           content: true,
-          createdAt: true,
           id: true,
+          createdAt: true,
           author: {
             select: {
               firstName: true,
