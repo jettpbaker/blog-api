@@ -73,10 +73,15 @@ export const getPostAuthor = async (id) => {
 }
 
 export const createPost = async (post) => {
-  const newPost = await prisma.post.create({
-    data: post,
-  })
-  return newPost
+  try {
+    const newPost = await prisma.post.create({
+      data: post,
+    })
+    return newPost
+  } catch (err) {
+    console.error(err)
+    return false
+  }
 }
 
 export const deletePostById = async (id) => {
