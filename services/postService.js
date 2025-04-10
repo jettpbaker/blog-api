@@ -77,6 +77,7 @@ export const createPost = async (post) => {
     const newPost = await prisma.post.create({
       data: post,
     })
+    console.log(newPost)
     return newPost
   } catch (err) {
     console.error(err)
