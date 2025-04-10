@@ -62,3 +62,11 @@ export const signup = async (req, res) => {
     res.status(500).json({ message: 'Server error' })
   }
 }
+
+export const getName = (req, res) => {
+  if (!req.user) {
+    return res.status(404).json({ message: 'No user found' })
+  }
+  const { firstName, lastName } = req.user
+  res.json({ firstName, lastName })
+}
