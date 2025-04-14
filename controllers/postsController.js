@@ -5,6 +5,7 @@ import {
   getPostAuthor,
   deletePostById,
   publishPostById,
+  getUserPosts as getAuthorPosts,
 } from '../services/postService.js'
 
 export const getPosts = async (req, res) => {
@@ -68,4 +69,14 @@ export const updatePost = async (req, res) => {
     return res.status(404).json({ message: 'Post to update not found' })
   }
   res.status(200).json({ message: 'Post published' })
+}
+
+export const getUserPosts = async (req, res) => {
+  const id = Number(req.user.id)
+  const posts = await getAuthorPosts(id)
+
+  if (!posts) {
+    return res.status(404).json({ message: 'Could not find posts' })
+  }
+  res.status(200).json(posts)
 }
