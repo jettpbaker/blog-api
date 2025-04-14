@@ -7,5 +7,6 @@ const router = Router()
 router.post('/signup', auth.signup)
 router.post('/login', auth.login)
 router.get('/user', isAuthed, auth.getName)
+router.get('/admin', isAuthed, auth.admin)
 
 export default router
