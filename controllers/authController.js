@@ -70,3 +70,12 @@ export const getName = (req, res) => {
   const { firstName, lastName } = req.user
   res.json({ firstName, lastName })
 }
+
+export const admin = (req, res) => {
+  console.log(req.user)
+  let admin = false
+  if (req.user) {
+    admin = req.user.admin
+  }
+  res.json(admin)
+}
