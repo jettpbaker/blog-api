@@ -63,6 +63,14 @@ export const getPostById = async (id) => {
   return post
 }
 
+export const getUserPosts = async (id) => {
+  return await prisma.post.findMany({
+    where: {
+      authorId: id,
+    },
+  })
+}
+
 export const getPostAuthor = async (id) => {
   return await prisma.post.findUnique({
     where: { id },
