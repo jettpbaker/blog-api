@@ -4,7 +4,7 @@ import {
   getPostById,
   getPostAuthor,
   deletePostById,
-  publishPostById,
+  togglePostPublishedById,
   getUserPosts as getAuthorPosts,
 } from '../services/postService.js'
 
@@ -61,9 +61,9 @@ export const deletePost = async (req, res) => {
   res.status(200).json({ message: 'Post deleted' })
 }
 
-export const updatePost = async (req, res) => {
+export const togglePublishPost = async (req, res) => {
   const id = Number(req.params.id)
-  const updatedPost = await publishPostById(id)
+  const updatedPost = await togglePostPublishedById(id)
 
   if (!updatedPost) {
     return res.status(404).json({ message: 'Post to update not found' })

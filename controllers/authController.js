@@ -72,7 +72,6 @@ export const getName = (req, res) => {
 }
 
 export const admin = (req, res) => {
-  console.log(req.user)
   let admin = false
   if (req.user) {
     admin = req.user.admin
