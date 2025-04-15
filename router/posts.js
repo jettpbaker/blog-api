@@ -12,6 +12,6 @@ router.post('/', isAuthed, posts.createPost)
 
 router.delete('/:id', isAuthed, isAdmin, posts.deletePost)
 
-router.put('/:id', isAuthed, isAdmin, posts.updatePost)
+router.put('/:id', isAuthed, isAdmin, posts.togglePublishPost)
 
 export default router
