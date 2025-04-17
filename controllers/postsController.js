@@ -96,7 +96,8 @@ export const updatePostContent = async (req, res) => {
     return res.status(404).json({ message: 'Post not found' })
   }
 
-  if (post.authorId !== userId) {
+  const author = await getPostAuthor(postId)
+  if (author.authorId !== userId) {
     return res.status(403).json({ message: 'You are not authorized to edit this post' })
   }
 
