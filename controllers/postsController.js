@@ -6,6 +6,7 @@ import {
   deletePostById,
   togglePostPublishedById,
   getUserPosts as getAuthorPosts,
+  updatePostContentById,
 } from '../services/postService.js'
 
 export const getPosts = async (req, res) => {
@@ -79,4 +80,26 @@ export const getUserPosts = async (req, res) => {
     return res.status(404).json({ message: 'Could not find posts' })
   }
   res.status(200).json(posts)
+}
+
+export const updatePostContent = async (req, res) => {
+  const postId = Number(req.params.id)
+  const userId = Number(req.user.id)
+  const { content } = req.body
+
+  if (!content) {
+    return res.status(400).json({ message: 'Content is required' })
+  }
+
+  const post = await getPostById(postId)
+  if (!post) {
+    return res.status(404).json({ message: 'Post not found' })
+  }
+
+  if (post.authorId !== userId) {
+    return res.status(403).json({ message: 'You are not authorized to edit this post' })
+  }
+
+  const updatedPost = await updatePostContentById(postId, content)
+  res.status(200).json(updatedPost)
 }

@@ -1,10 +1,8 @@
 import express from 'express'
-import passport from './config/passport.js'
 import posts from './router/posts.js'
 import comments from './router/comments.js'
 import ai from './router/ai.js'
 import auth from './router/auth.js'
-import { isAuthed, isAdmin } from './middleware/authMiddleware.js'
 import cors from 'cors'
 
 const app = express()
