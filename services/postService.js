@@ -108,21 +108,23 @@ export const deletePostById = async (id) => {
 }
 
 export const togglePostPublishedById = async (id) => {
-  const post = await getPostById(id)
-  const published = post.published
-  const toggle = !published
+  const post = await prisma.post.findUnique({
+    where: { id },
+  })
 
-  try {
-    return await prisma.post.update({
-      where: {
-        id: id,
-      },
-      data: {
-        published: toggle,
-      },
-    })
-  } catch (err) {
-    console.error(err)
-    return false
+  if (!post) {
+    return null
   }
+
+  return prisma.post.update({
+    where: { id },
+    data: { published: !post.published },
+  })
+}
+
+export const updatePostContentById = async (id, content) => {
+  return prisma.post.update({
+    where: { id },
+    data: { content },
+  })
 }
