@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 const createJWT = (user) => {
   const payload = { id: user.id, email: user.email }
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '24hr',
+    expiresIn: '7d',
   })
 
   return token
