@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { getUserByEmail, createUser } from '../services/userService.js'
 import bcrypt from 'bcryptjs'
+import { createApiError } from '../middleware/errorHandler.js'
 
 const createJWT = (user) => {
   const payload = { id: user.id, email: user.email }
@@ -11,20 +12,20 @@ const createJWT = (user) => {
   return token
 }
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   const { email, password } = req.body
 
   try {
     const user = await getUserByEmail(email)
 
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email' })
+      return next(createApiError(401, 'Invalid email'))
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid password' })
+      return next(createApiError(401, 'Invalid password'))
     }
 
     const token = createJWT(user)
@@ -32,11 +33,11 @@ export const login = async (req, res) => {
     return res.status(200).json({ token, message: 'Login success' })
   } catch (err) {
     console.error(`[${email}] Login controller error:`, err)
-    return res.status(500).json({ message: 'Server error' })
+    next(err)
   }
 }
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
   const { firstName, lastName, email } = req.body
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
@@ -56,16 +57,16 @@ export const signup = async (req, res) => {
     console.error(err)
 
     if (err.code === 'P2002') {
-      return res.status(400).json({ message: 'Email already in use' })
+      return next(createApiError(400, 'Email already in use'))
     }
 
-    res.status(500).json({ message: 'Server error' })
+    next(err)
   }
 }
 
-export const getName = (req, res) => {
+export const getName = (req, res, next) => {
   if (!req.user) {
-    return res.status(404).json({ message: 'No user found' })
+    return next(createApiError(404, 'No user found'))
   }
   const { firstName, lastName } = req.user
   res.json({ firstName, lastName })
