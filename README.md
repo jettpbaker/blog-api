@@ -26,7 +26,7 @@
 | Endpoint                        | Method | Description                                   |
 | ------------------------------- | ------ | --------------------------------------------- |
 | /api/posts                      | GET    | Get all posts                                 |
-| /api/posts/:id                  | GET    | Get a specific post by ID                     |
+| /api/posts/:id                  | GET    | Get a specific post by ID (includes comments) |
 | /api/posts                      | POST   | Create a new post (requires authentication)   |
 | /api/posts/:id                  | DELETE | Delete a post (requires authentication)       |
 | /api/posts/:id                  | PATCH  | Update post content (requires authentication) |
@@ -37,6 +37,5 @@
 
 | Endpoint                        | Method | Description                                    |
 | ------------------------------- | ------ | ---------------------------------------------- |
-| /api/posts/:postId/comments     | GET    | Get comments for a post                        |
 | /api/posts/:postId/comments     | POST   | Create a new comment (requires authentication) |
 | /api/posts/:postId/comments/:id | DELETE | Delete a comment (requires authentication)     |
