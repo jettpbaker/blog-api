@@ -20,10 +20,10 @@
 | api/posts/:id         | DELETE | Delete a post (requires authentication)        |
 | api/posts/:id         | PUT    | Toggle post publish status (requires admin)    |
 | api/posts/:id/content | PUT    | Update post content (requires authentication)  |
-| /auth/signup          | POST   | Register a new user                            |
-| /auth/login           | POST   | Login a user                                   |
-| /auth/user            | GET    | Get the name of the authenticated user         |
-| /auth/admin           | GET    | Check if user is admin                         |
+| auth/signup          | POST   | Register a new user                            |
+| auth/login           | POST   | Login a user                                   |
+| auth/user            | GET    | Get the name of the authenticated user         |
+| auth/admin           | GET    | Check if user is admin                         |
 | api/comments          | POST   | Create a new comment (requires authentication) |
 | api/comments/:id      | DELETE | Delete a comment (requires authentication)     |
 | api/ai                | POST   | Generate AI description                        |
