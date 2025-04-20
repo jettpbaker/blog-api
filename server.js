@@ -1,6 +1,5 @@
 import express from 'express'
 import posts from './router/posts.js'
-import comments from './router/comments.js'
 import users from './router/users.js'
 import cors from 'cors'
 
