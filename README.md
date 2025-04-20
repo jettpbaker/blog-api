@@ -8,3 +8,22 @@
 - [ ] add docker compose file to spin up postgres
 - [ ] could add docker file for the whole app
 - [x] no need to be admin to delete a post
+
+# Endpoints
+
+| Endpoint           | Method | Description                                    |
+| ------------------ | ------ | ---------------------------------------------- |
+| /posts             | GET    | Get all posts                                  |
+| /posts/user-posts  | GET    | Get posts for the authenticated user           |
+| /posts/:id         | GET    | Get a specific post by ID                      |
+| /posts             | POST   | Create a new post (requires authentication)    |
+| /posts/:id         | DELETE | Delete a post (requires authentication)        |
+| /posts/:id         | PUT    | Toggle post publish status (requires admin)    |
+| /posts/:id/content | PUT    | Update post content (requires authentication)  |
+| /auth/signup       | POST   | Register a new user                            |
+| /auth/login        | POST   | Login a user                                   |
+| /auth/user         | GET    | Get the name of the authenticated user         |
+| /auth/admin        | GET    | Check if user is admin                         |
+| /comments          | POST   | Create a new comment (requires authentication) |
+| /comments/:id      | DELETE | Delete a comment (requires authentication)     |
+| /ai                | POST   | Generate AI description                        |
