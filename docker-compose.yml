@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: bloguser
+      POSTGRES_PASSWORD: blogpassword
+      POSTGRES_DB: blogdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "bloguser", "-d", "blogdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://bloguser:blogpassword@db:5432/blogdb
+      JWT_SECRET: development_jwt_secret
+      CLIENT_URL: http://localhost:5173
+      OPENROUTER_KEY: ${OPENROUTER_KEY}
+      NODE_ENV: development
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/node_modules
+    command: >
+      sh -c "
+        pnpm prisma migrate deploy &&
+        pnpm run dev
+      "
+
+volumes:
+  postgres_data:
+  node_modules:
