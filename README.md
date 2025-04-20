@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] remove unused import statements
+- [x] remove unused import statements
 - [ ] remove postinstall ??
 - [x] rename updatePost
 - [ ] basic "what to do" to run
@@ -8,7 +8,7 @@
 - [ ] add docker compose file to spin up postgres
 - [ ] could add docker file for the whole app
 - [x] no need to be admin to delete a post
-- [ ] error handling middleware?
+- [x] error handling
 
 # API Documentation
 
