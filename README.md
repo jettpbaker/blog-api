@@ -1,15 +1,3 @@
-# TODO
-
-- [x] remove unused import statements
-- [ ] remove postinstall ??
-- [x] rename updatePost
-- [ ] basic "what to do" to run
-- [ ] add a template env file, with a comment - not commiting real env vars
-- [ ] add docker compose file to spin up postgres
-- [ ] could add docker file for the whole app
-- [x] no need to be admin to delete a post
-- [x] error handling
-
 # API Documentation
 
 ## Authentication & Users
@@ -40,3 +28,15 @@
 | ------------------------------- | ------ | ---------------------------------------------- |
 | /api/posts/:postId/comments     | POST   | Create a new comment (requires authentication) |
 | /api/posts/:postId/comments/:id | DELETE | Delete a comment (requires authentication)     |
+
+# TODO
+
+- [x] remove unused import statements
+- [ ] remove postinstall ??
+- [x] rename updatePost
+- [ ] basic "what to do" to run
+- [ ] add a template env file, with a comment - not commiting real env vars
+- [ ] add docker compose file to spin up postgres
+- [ ] could add docker file for the whole app
+- [x] no need to be admin to delete a post
+- [x] error handling
