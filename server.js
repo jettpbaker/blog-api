@@ -1,8 +1,6 @@
 import express from 'express'
 import posts from './router/posts.js'
-import comments from './router/comments.js'
-import ai from './router/ai.js'
-import auth from './router/auth.js'
+import users from './router/users.js'
 import cors from 'cors'
 
 const app = express()
@@ -26,10 +24,9 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+// Mount routes
 app.use('/api/posts', posts)
-app.use('/api/comments', comments)
-app.use('/api/ai', ai)
-app.use('/auth', auth)
+app.use('/api/users', users)
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
