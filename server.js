@@ -2,6 +2,7 @@ import express from 'express'
 import posts from './router/posts.js'
 import users from './router/users.js'
 import cors from 'cors'
+import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
@@ -24,9 +25,10 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// Mount routes
 app.use('/api/posts', posts)
 app.use('/api/users', users)
+
+app.use(errorHandler)
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
