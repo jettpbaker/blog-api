@@ -10,7 +10,7 @@ router.post('/login', auth.login)
 router.post('/signup', auth.signup)
 
 // User endpoints
-router.get('/me', isAuthed, auth.getName)
+router.get('/me', isAuthed, auth.getUser)
 router.get('/me/admin', isAuthed, auth.admin)
 router.get('/me/posts', isAuthed, posts.getUserPosts)
 

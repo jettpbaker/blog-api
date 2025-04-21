@@ -3,6 +3,19 @@ import prisma from '../prisma/client.js'
 export const createComment = async (comment) => {
   const newComment = await prisma.comment.create({
     data: comment,
+    select: {
+      content: true,
+      id: true,
+      createdAt: true,
+      author: {
+        select: {
+          firstName: true,
+          lastName: true,
+          admin: true,
+          id: true,
+        },
+      },
+    },
   })
   return newComment
 }

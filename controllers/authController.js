@@ -64,12 +64,12 @@ export const signup = async (req, res, next) => {
   }
 }
 
-export const getName = (req, res, next) => {
+export const getUser = (req, res, next) => {
   if (!req.user) {
     return next(createApiError(404, 'No user found'))
   }
-  const { firstName, lastName } = req.user
-  res.json({ firstName, lastName })
+  const { id, firstName, lastName, email, admin } = req.user
+  res.json({ id, firstName, lastName, email, admin })
 }
 
 export const admin = (req, res) => {
