@@ -113,7 +113,3 @@ If you want to run the app locally and make code changes:
 | --------------------------- | ------ | -------------------- | --------------------- | ------------- |
 | /api/posts/:postId/comments | POST   | Create a new comment | `{ content, postId }` | Yes           |
 | /api/posts/comments/:id     | DELETE | Delete a comment     | None                  | Yes           |
-
-## License
-
-[MIT](./LICENSE)
