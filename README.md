@@ -20,7 +20,7 @@
 | /api/posts/:id                  | DELETE | Delete a post (requires authentication)       | None                              |
 | /api/posts/:id                  | PATCH  | Update post content (requires authentication) | `{ content }`                     |
 | /api/posts/:id/publish          | PATCH  | Toggle post publish status (requires admin)   | None                              |
-| /api/posts/generate-description | POST   | Generate AI description                       | None                              |
+| /api/posts/generate-description | POST   | Generate AI description                       | `{ postMarkdown }`                |
 
 ## Comments
 
@@ -39,3 +39,4 @@
 - [x] add docker file for the whole app
 - [x] no need to be admin to delete a post
 - [x] error handling
+- [ ] if no openrouter key, send back basic description

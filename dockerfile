@@ -1,4 +1,3 @@
-# Dockerfile
 FROM node:20-slim
 
 # install OpenSSL so Prisma can detect it
