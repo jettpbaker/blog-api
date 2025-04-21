@@ -39,7 +39,7 @@ This is the easiest way to get started, especially if you're not familiar with t
    - Edit `.env` to set your database URL, JWT secret, and OpenRouter API key.
 4. Start the application:
    ```bash
-   docker-compose up
+   docker compose up
    ```
 5. The API will be available at `http://localhost:3000`
 
