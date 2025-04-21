@@ -54,7 +54,6 @@ export const generateDescription = async (req, res, next) => {
     const jsonString = rawContent.replace(/^```(json)?\n?/, '').replace(/```$/, '')
 
     const jsonResponse = JSON.parse(jsonString)
-    console.log(jsonResponse)
     return res.status(200).json(jsonResponse)
   } catch (err) {
     console.error('Error in AI description generation:', err)
