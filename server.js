@@ -6,28 +6,12 @@ import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`)
-  next()
-})
+const corsOptions = {
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}
 
-// const allowedOrigins = [process.env.CLIENT_URL]
-
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (!origin) return callback(null, true)
-//     if (allowedOrigins.indexOf(origin) === -1) {
-//       const msg = 'The CORS policy for this site does not allow access from the specified Origin.'
-//       return callback(new Error(msg), false)
-//     }
-//     return callback(null, true)
-//   },
-//   credentials: true,
-// }
-
-// app.use(cors(corsOptions))
-
-// app.use(cors({ origin: true, credentials: true }))
+app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

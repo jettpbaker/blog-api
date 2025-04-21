@@ -3,7 +3,13 @@ import { createApiError } from '../middleware/errorHandler.js'
 const key = process.env.OPENROUTER_KEY
 
 export const generateDescription = async (req, res, next) => {
-  console.log(req.body)
+  // Uncomment this line if you're testing and don't want to hit rate limits:
+  // return res.status(200).json({ description: 'This is a test description' })
+
+  if (!key) {
+    console.error('OpenRouter key is not set')
+    return res.status(200).json({ description: 'Could not generate description' })
+  }
 
   const postMarkdown = req.body.postMarkdown
 
