@@ -19,6 +19,6 @@ router.post('/generate-description', isAuthed, ai.generateDescription)
 
 // Comments endpoints
 router.post('/:postId/comments', isAuthed, comments.newComment)
-router.delete('/:postId/comments/:commentId', isAuthed, comments.deleteComment)
+router.delete('/comments/:commentId', isAuthed, comments.deleteComment)
 
 export default router

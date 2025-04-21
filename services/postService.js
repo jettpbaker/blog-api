@@ -54,6 +54,7 @@ export const getPostById = async (id) => {
               firstName: true,
               lastName: true,
               admin: true,
+              id: true,
             },
           },
         },

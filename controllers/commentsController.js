@@ -30,7 +30,7 @@ export const newComment = async (req, res, next) => {
 
 export const deleteComment = async (req, res, next) => {
   try {
-    const commentID = Number(req.params.id)
+    const commentID = Number(req.params.commentId)
     const userID = Number(req.user.id)
 
     const commentAuthor = await getCommentAuthor(commentID)
