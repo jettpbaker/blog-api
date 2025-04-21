@@ -39,4 +39,4 @@
 - [x] add docker file for the whole app
 - [x] no need to be admin to delete a post
 - [x] error handling
-- [ ] if no openrouter key, send back basic description
+- [x] if no openrouter key, send back basic description
