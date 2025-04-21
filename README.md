@@ -2,32 +2,32 @@
 
 ## Authentication & Users
 
-| Endpoint            | Method | Description                            |
-| ------------------- | ------ | -------------------------------------- |
-| /api/users/login    | POST   | Login a user                           |
-| /api/users/signup   | POST   | Register a new user                    |
-| /api/users/me       | GET    | Get the name of the authenticated user |
-| /api/users/me/admin | GET    | Check if user is admin                 |
-| /api/users/me/posts | GET    | Get posts for the authenticated user   |
+| Endpoint            | Method | Description                            | Request Body                               |
+| ------------------- | ------ | -------------------------------------- | ------------------------------------------ |
+| /api/users/login    | POST   | Login a user                           | `{ email, password }`                      |
+| /api/users/signup   | POST   | Register a new user                    | `{ firstName, lastName, email, password }` |
+| /api/users/me       | GET    | Get the name of the authenticated user | None                                       |
+| /api/users/me/admin | GET    | Check if user is admin                 | None                                       |
+| /api/users/me/posts | GET    | Get posts for the authenticated user   | None                                       |
 
 ## Posts
 
-| Endpoint                        | Method | Description                                   |
-| ------------------------------- | ------ | --------------------------------------------- |
-| /api/posts                      | GET    | Get all posts                                 |
-| /api/posts/:id                  | GET    | Get a specific post by ID (includes comments) |
-| /api/posts                      | POST   | Create a new post (requires authentication)   |
-| /api/posts/:id                  | DELETE | Delete a post (requires authentication)       |
-| /api/posts/:id                  | PATCH  | Update post content (requires authentication) |
-| /api/posts/:id/publish          | PATCH  | Toggle post publish status (requires admin)   |
-| /api/posts/generate-description | POST   | Generate AI description                       |
+| Endpoint                        | Method | Description                                   | Request Body                      |
+| ------------------------------- | ------ | --------------------------------------------- | --------------------------------- |
+| /api/posts                      | GET    | Get all posts                                 | None                              |
+| /api/posts/:id                  | GET    | Get a specific post by ID (includes comments) | None                              |
+| /api/posts                      | POST   | Create a new post (requires authentication)   | `{ title, content, description }` |
+| /api/posts/:id                  | DELETE | Delete a post (requires authentication)       | None                              |
+| /api/posts/:id                  | PATCH  | Update post content (requires authentication) | `{ content }`                     |
+| /api/posts/:id/publish          | PATCH  | Toggle post publish status (requires admin)   | None                              |
+| /api/posts/generate-description | POST   | Generate AI description                       | None                              |
 
 ## Comments
 
-| Endpoint                        | Method | Description                                    |
-| ------------------------------- | ------ | ---------------------------------------------- |
-| /api/posts/:postId/comments     | POST   | Create a new comment (requires authentication) |
-| /api/posts/:postId/comments/:id | DELETE | Delete a comment (requires authentication)     |
+| Endpoint                        | Method | Description                                    | Request Body          |
+| ------------------------------- | ------ | ---------------------------------------------- | --------------------- |
+| /api/posts/:postId/comments     | POST   | Create a new comment (requires authentication) | `{ content, postId }` |
+| /api/posts/:postId/comments/:id | DELETE | Delete a comment (requires authentication)     | None                  |
 
 # TODO
 
