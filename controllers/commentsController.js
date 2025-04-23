@@ -22,7 +22,6 @@ export const newComment = async (req, res, next) => {
     }
 
     const createdComment = await createComment(comment)
-    console.log('Created comment:', createdComment)
     res.status(201).json(createdComment)
   } catch (err) {
     next(err)
